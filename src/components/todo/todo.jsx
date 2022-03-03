@@ -1,25 +1,26 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Checkbox, TextField } from "@mui/material";
 import "./todo.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import Container from "@mui/material/Container";
-import { alignProperty } from "@mui/material/styles/cssUtils";
+import {TodoContext} from "../app/App";
+
 
 export const Todo = (props) => {
-  const [todos, setTodos] = useState([]);
+  
   const [inputText, setInputText] = useState({ text: "", isComplete: false });
 
-  function addTodo() {
-    const newTodos = [...todos, { text: inputText.text, isComplete: false }];
+  const {myTodos, setTodos} = useContext(TodoContext);
+  
+  function addTodo(inputText) {
+    const newTodos = [...myTodos, { text: inputText.text, isComplete: false }];
     setTodos(newTodos);
   }
-
+  
   function deleteTodo(deletedTodo) {
-    //if return true, keep if returns false, will remove it
-    setTodos(todos.filter((todo) => todo.text !== deletedTodo));
+    setTodos(myTodos.filter((todo) => todo.text !== deletedTodo));
   }
 
   return (
@@ -40,12 +41,12 @@ export const Todo = (props) => {
               onChange={(event) => setInputText({ text: event.target.value })}
             ></TextField>
           </td>
-           <td colSpan={2} className="plus">
-            <Button onClick={addTodo}>+</Button>
+          <td colSpan={2} className="plus">
+            <Button onClick={() => addTodo(inputText)}>+</Button>
           </td>
         </tr>
 
-        {todos.map((todo) => (
+        {myTodos.map((todo) => (
           <TodoItem
             text={todo.text}
             isComplete={todo.isComplete}

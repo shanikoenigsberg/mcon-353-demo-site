@@ -13,23 +13,24 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
-const pages = [{title: "Home", path: '/'}, {title: "Todo", path: '/todo'}];
 
+const pages = [
+  { title: "Home", path: "/" },
+  { title: "Todo", path: "/todo" },
+];
 
 export const Header = () => {
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
- 
 
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
     navigate(page.path);
   };
-
 
   return (
     <AppBar position="static">
@@ -74,7 +75,10 @@ const navigate = useNavigate();
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.title} onClick={() => handleCloseNavMenu(page)}>
+                <MenuItem
+                  key={page.title}
+                  onClick={() => handleCloseNavMenu(page)}
+                >
                   <Typography textAlign="center">{page.title}</Typography>
                 </MenuItem>
               ))}
@@ -100,11 +104,9 @@ const navigate = useNavigate();
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-          </Box>
+          <Box sx={{ flexGrow: 0 }}></Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
 };
-
