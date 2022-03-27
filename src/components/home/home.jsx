@@ -7,6 +7,9 @@ import { Card } from '@mui/material';
 import { CardContent } from '@mui/material';
 import { CardMedia } from '@mui/material';
 import React, {useState} from 'react';
+import organization from "../../images/organization.jpg";
+import pencils from "../../images/pencils.jpg";
+import abc from "../../images/abc.jpg";
 
 
 export const Home = () => {
@@ -26,7 +29,7 @@ export const Home = () => {
                 component="img"
                 height="194"
                 width="30%"
-                image="organization.jpg"
+                image={organization}
                 alt="Organization"
       />
                 <CardContent>
@@ -44,7 +47,7 @@ export const Home = () => {
                 component="img"
                 height="194"
                 width="30%"
-                image="pencils.jpg"
+                image={pencils}
                 alt="Pencils"
       />
        <CardContent>
@@ -59,7 +62,7 @@ export const Home = () => {
                 component="img"
                 height="194"
                 width="30%"
-                image="abc.jpg"
+                image={abc}
                 alt="Organization"
       />
                 <CardContent>

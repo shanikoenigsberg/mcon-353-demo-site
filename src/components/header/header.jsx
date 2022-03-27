@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 const pages = [
   { title: "Home", path: "/" },
   { title: "Todo", path: "/todo" },
+  { title: "Chats", path: "/chats" },
 ];
 
 export const Header = () => {
@@ -33,7 +34,7 @@ export const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" style={{backgroundColor: "#8f898f"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography

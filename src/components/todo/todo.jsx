@@ -5,20 +5,18 @@ import "./todo.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import {TodoContext} from "../app/App";
-
+import { TodoContext } from "../state/context";
 
 export const Todo = (props) => {
-  
   const [inputText, setInputText] = useState({ text: "", isComplete: false });
 
-  const {myTodos, setTodos} = useContext(TodoContext);
-  
+  const { myTodos, setTodos } = useContext(TodoContext);
+
   function addTodo(inputText) {
     const newTodos = [...myTodos, { text: inputText.text, isComplete: false }];
     setTodos(newTodos);
   }
-  
+
   function deleteTodo(deletedTodo) {
     setTodos(myTodos.filter((todo) => todo.text !== deletedTodo));
   }
@@ -38,6 +36,7 @@ export const Todo = (props) => {
               id="standard-basic"
               label="enter task"
               variant="standard"
+              placeholder="add task"
               onChange={(event) => setInputText({ text: event.target.value })}
             ></TextField>
           </td>
@@ -60,20 +59,22 @@ export const Todo = (props) => {
 
 const TodoItem = (props) => {
   return (
-    <tr className="list">
-      <td className="name">{props.text}</td>
-      <td className="checkbox">
-        <Checkbox checked={props.isCompleted}></Checkbox>
-      </td>
-      <td className="garbage">
-        <IconButton
-          aria-label="delete"
-          size="small"
-          onClick={() => props.deleteTodo(props.text)}
-        >
-          <DeleteIcon fontSize="inherit" />
-        </IconButton>
-      </td>
-    </tr>
+    <div data-testid="todo-item">
+      <tr className="list">
+        <td className="name">{props.text}</td>
+        <td className="checkbox">
+          <Checkbox checked={props.isCompleted}></Checkbox>
+        </td>
+        <td className="garbage">
+          <IconButton
+            aria-label="delete"
+            size="small"
+            onClick={() => props.deleteTodo(props.text)}
+          >
+            <DeleteIcon fontSize="inherit" />
+          </IconButton>
+        </td>
+      </tr>
+    </div>
   );
 };
