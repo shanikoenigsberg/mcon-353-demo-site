@@ -31,7 +31,7 @@ export const Todo = (props) => {
           </td>
         </tr>
         <tr className="input">
-          <td>
+          <td colSpan={2}>
             <TextField
               id="standard-basic"
               label="enter task"
@@ -40,7 +40,7 @@ export const Todo = (props) => {
               onChange={(event) => setInputText({ text: event.target.value })}
             ></TextField>
           </td>
-          <td colSpan={2} className="plus">
+          <td colSpan={1} className="plus">
             <Button onClick={() => addTodo(inputText)}>+</Button>
           </td>
         </tr>
@@ -58,12 +58,29 @@ export const Todo = (props) => {
 };
 
 const TodoItem = (props) => {
+
+  const { myTodos, setTodos } = useContext(TodoContext);
+
+  const handleChange = () => {
+    
+    const newTodos = myTodos.map(todo => {
+
+      if (props.text === todo.text) {
+         return {...todo, isComplete: !todo.isComplete};
+      }
+      else {
+        return todo;
+      }
+    });
+    setTodos(newTodos);
+
+}
+
   return (
-    <div data-testid="todo-item">
-      <tr className="list">
-        <td className="name">{props.text}</td>
+      <tr className="list" data-testid="todoItem" >
+        <td className="name" data-testid="todoItem_text">{props.text}</td>
         <td className="checkbox">
-          <Checkbox checked={props.isCompleted}></Checkbox>
+          <Checkbox checked={props.isComplete} onChange={handleChange}></Checkbox>
         </td>
         <td className="garbage">
           <IconButton
@@ -71,10 +88,10 @@ const TodoItem = (props) => {
             size="small"
             onClick={() => props.deleteTodo(props.text)}
           >
-            <DeleteIcon fontSize="inherit" />
+            <DeleteIcon fontSize="inherit" data-testid="todoItem_delete"/>
           </IconButton>
         </td>
       </tr>
-    </div>
   );
 };
+

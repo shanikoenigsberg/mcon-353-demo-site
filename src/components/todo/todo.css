@@ -20,7 +20,9 @@ table {
 .list td {
   border-bottom: 2px solid rgba(184, 51, 73, 0.815);
   padding: 7px;
+  min-width: 50px;
 }
+
 .title {
   text-align: left;
 }
