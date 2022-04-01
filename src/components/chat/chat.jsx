@@ -144,7 +144,7 @@ export const Chat = () => {
         style={{ backgroundColor: "#ffb6c1" }}
       >
         <CardContent>
-          {messages.reverse().map((message) => (
+          {messages.map((message) => (
             <div>
               <Message
                 text={message.text}
